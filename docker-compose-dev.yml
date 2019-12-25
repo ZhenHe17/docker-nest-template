@@ -11,7 +11,7 @@ services:
     restart: always
     networks:
       - dev
-  nest_server:
+  nest_server_mongo_dev:
     build:
       context: ./
       dockerfile: Dockerfile-dev

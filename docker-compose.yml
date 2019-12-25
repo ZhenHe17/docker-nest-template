@@ -12,7 +12,7 @@ services:
       - './db/data:/data/db'
     networks:
       - backend
-  nest_server:
+  nest_server_mongo:
     build:
       context: ./
     ports:
