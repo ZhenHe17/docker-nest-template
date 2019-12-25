@@ -20,8 +20,11 @@ services:
     depends_on:
       - mongodb
     volumes:
-      - ./:/usr/src/app
+      - .:/usr/src/app
+      - nest_node_modules:/usr/src/app/node_modules
     networks:
       - backend
 networks:
   backend:
+volumes:
+  nest_node_modules:

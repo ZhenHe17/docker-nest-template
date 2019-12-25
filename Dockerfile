@@ -1,8 +1,9 @@
-FROM node:10-alpine
+FROM node
 
 RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
-RUN npm install global @nestjs/cli --registry=https://registry.npm.taobao.org
+COPY ./package.json ./
+RUN npm install --registry=https://registry.npm.taobao.org
 CMD npm run start
