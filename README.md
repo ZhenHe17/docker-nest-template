@@ -1,26 +1,26 @@
-### Mongoose base sample
+# FE Articles
 
-### Installation
+## QuickStart
 
+### Development
 
-`npm install`
+开发环境使用了文件映射，首次启动需要在本地安装好依赖
+``` bash
+npm i
+# 或者
+yarn
+```
 
-### Running
+然后启动docker
+``` bash
+docker-compose -f docker-compose-dev.yml up
+```
 
-This example requires docker or a local mongodb installation.  If using a local mongodb, see `app.module.ts` for connection options, and make sure there are matching options for the mongodb installation and the source code.
+### Deploy
 
-#### Docker
+``` bash
+docker-compose up
+```
 
-There is a `docker-compose.yml` file for starting Docker.
+api: http://localhost:3000/
 
-`docker-compose up`
-
-After running the sample, you can stop the Docker container with
-
-`docker-compose down`
-
-### Run the sample
-
-Then, run Nest as usual:
-
-`npm run start`
