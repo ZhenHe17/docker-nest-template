@@ -16,3 +16,4 @@ docker-compose up
 
 api: http://localhost:3000/
 
+<%= people.join(", "); %>
