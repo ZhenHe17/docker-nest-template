@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+  <% if (MongoDB) { %>
   mongodb:
     image: mongo:latest
     restart: always
@@ -11,20 +12,40 @@ services:
     restart: always
     networks:
       - dev
-  nest_server_mongo_dev:
+  <% } %>
+  <% if (MySQL) { %>
+  mysql:
+    image: mysql:5
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+    ports:
+      - "3306:3306"
+    networks:
+      - dev
+  <% } %>
+  <% if (redis) { %>
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - dev
+  <% } %>
+  nest_server_dev:
     build:
       context: ./
       dockerfile: Dockerfile-dev
     ports:
       - "3000:3000"
-    depends_on:
-      - mongodb
     volumes:
       - .:/usr/src/app
-      - nest_node_modules:/usr/src/app/node_modules
+      - nest_dev_node_modules:/usr/src/app/node_modules
     networks:
       - dev
 networks:
   dev:
 volumes:
-  nest_node_modules:
+  nest_dev_node_modules:

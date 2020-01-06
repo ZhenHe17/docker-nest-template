@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+  <% if (MongoDB) { %>
   mongodb:
     image: mongo:latest
     restart: always
@@ -9,16 +10,43 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - './db/data:/data/db'
+      - ./db/mongo/data:/data/db:rw
     networks:
       - backend
-  nest_server_mongo:
+  <% } %>
+  <% if (MySQL) { %>
+  mysql:
+    image: mysql:5
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/mysql/logs:/var/log/mysql:rw
+      - ./db/mysql/data:/var/lib/mysql:rw
+    networks:
+      - backend
+  <% } %>
+  <% if (redis) { %>
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - backend
+  <% } %>
+  nest_server:
     build:
       context: ./
     ports:
       - "3000:3000"
     depends_on:
       - mongodb
+      - mysql
+      - redis
     volumes:
       - .:/usr/src/app
       - nest_node_modules:/usr/src/app/node_modules

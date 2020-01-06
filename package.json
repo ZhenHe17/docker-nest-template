@@ -22,7 +22,17 @@
     "@nestjs/common": "6.10.4",
     "@nestjs/core": "6.10.4",
     "@nestjs/platform-express": "6.10.4",
+    <% if (MySQL) { %>
+    "@nestjs/typeorm": "6.2.0",
+    "mysql": "2.17.1",
+    "typeorm": "0.2.20",
+    <% } %>
+    <% if (MongoDB) { %>
     "mongoose": "5.7.13",
+    <% } %>
+    <% if (redis) { %>
+    "redis": "^2.8.0",
+    <% } %>
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.0",
     "rxjs": "6.5.3"
@@ -34,6 +44,7 @@
     "@types/express": "4.17.2",
     "@types/node": "7.10.9",
     "@types/supertest": "2.0.8",
+    "@types/ws": "6.0.4",
     "jest": "24.9.0",
     "prettier": "1.19.1",
     "supertest": "4.0.2",
