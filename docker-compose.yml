@@ -1,7 +1,6 @@
 version: "3"
 
-services:
-  <% if (MongoDB) { %>
+services:<% if (MongoDB) { %>
   mongodb:
     image: mongo:latest
     restart: always
@@ -13,9 +12,7 @@ services:
       - ./db/mongo/data:/data/db:rw
     networks:
       - backend
-  <% } %>
-  <% if (MySQL) { %>
-  mysql:
+  <% } %><% if (MySQL) { %>mysql:
     image: mysql:5
     restart: always
     environment:
@@ -28,17 +25,14 @@ services:
       - ./db/mysql/data:/var/lib/mysql:rw
     networks:
       - backend
-  <% } %>
-  <% if (redis) { %>
-  redis:
+  <% } %><% if (redis) { %>redis:
     image: redis
     ports:
       - "6379:6379"
     restart: always
     networks:
       - backend
-  <% } %>
-  nest_server:
+  <% } %>nest_server:
     build:
       context: ./
     ports:
